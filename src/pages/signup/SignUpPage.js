@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { ContainerLogo, ContainerSignUp, ContainerSignUpPage } from "./styled.js";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import apiAuth from "../../services/apiAuth.js";
 
 
 
-export default function SignUp() {
+export default function SignUpPage() {
     const [form, setForm] = useState({ email: "", password: "", username: "", photo: "" })
-    //const navigate = useNavigate()
+    const navigate = useNavigate()
 
     function handleForm(e) {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -23,7 +23,8 @@ export default function SignUp() {
         
         apiAuth.signUp(form)
             .then(res =>{
-                alert("Usuario cadastrado com sucesso")
+                navigate("/")
+
             })
             .catch(err =>{
                
@@ -51,7 +52,9 @@ export default function SignUp() {
                     <input name="username" placeholder="  username" type="text" required value={form.name} onChange={handleForm} />
                     <input name="photo" placeholder="  picture url" type="url" value={form.photo} onChange={handleForm} required />
 
-                    <button type="submit" > Sign Up </button>
+                    <button type="submit" disabled={form.email.length === 0 || form.password.length === 0 || form.username.length === 0 || form.photo.length === 0}>
+                         Sign Up 
+                    </button>
                     <Link to={'/'}>
                         <div> Switch back to log in </div>
                     </Link>
