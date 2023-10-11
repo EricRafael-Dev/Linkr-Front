@@ -47,15 +47,15 @@ export default function SignUpPage() {
             </ContainerLogo>
             <ContainerSignUp>
                 <form onSubmit={signup}>
-                    <input name="email" placeholder="  e-mail" type="email" required value={form.email} onChange={handleForm} />
-                    <input name="password" placeholder="  password" type="password" value={form.password} onChange={handleForm} required />
-                    <input name="username" placeholder="  username" type="text" required value={form.name} onChange={handleForm} />
-                    <input name="photo" placeholder="  picture url" type="url" value={form.photo} onChange={handleForm} required />
+                    <input data-test="email" name="email" placeholder="  e-mail" type="email" required value={form.email} onChange={handleForm} />
+                    <input data-test="password" name="password" placeholder="  password" type="password" value={form.password} onChange={handleForm} required />
+                    <input data-test="username" name="username" placeholder="  username" type="text" required value={form.name} onChange={handleForm} />
+                    <input  data-test="picture-url" name="photo" placeholder="  picture url" type="url" value={form.photo} onChange={handleForm} required />
 
-                    <button type="submit" disabled={form.email.length === 0 || form.password.length === 0 || form.username.length === 0 || form.photo.length === 0}>
+                    <button data-test="sign-up-btn" type="submit" disabled={form.email.length === 0 || form.password.length === 0 || form.username.length === 0 || form.photo.length === 0}>
                          Sign Up 
                     </button>
-                    <Link to={'/'}>
+                    <Link to={'/'} data-test="login-link">
                         <div> Switch back to log in </div>
                     </Link>
                 </form>
