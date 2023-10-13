@@ -7,6 +7,7 @@ import apiAuth from "../../services/apiAuth.js";
 
 export default function SignUpPage() {
     const [form, setForm] = useState({ email: "", password: "", username: "", photo: "" })
+    const [send, setSend] = useState(false)
     const navigate = useNavigate()
 
     function handleForm(e) {
@@ -20,16 +21,19 @@ export default function SignUpPage() {
         if (form.email.length === 0 || form.password.length === 0 || form.username.length === 0 || form.photo.length === 0) {
             return alert("Preencha todos os campos")
         }
+
+        setSend(true);
         
         apiAuth.signUp(form)
             .then(res =>{
                 navigate("/")
-
+               
             })
             .catch(err =>{
+                setSend(false);
                
                 console.log(err.response.data)
-                alert(err.response.data.message)
+                alert(err.response.data.message || err.message)
             })
         
     }
@@ -52,7 +56,7 @@ export default function SignUpPage() {
                     <input data-test="username" name="username" placeholder="  username" type="text" required value={form.name} onChange={handleForm} />
                     <input  data-test="picture-url" name="photo" placeholder="  picture url" type="url" value={form.photo} onChange={handleForm} required />
 
-                    <button data-test="sign-up-btn" type="submit" disabled={form.email.length === 0 || form.password.length === 0 || form.username.length === 0 || form.photo.length === 0}>
+                    <button data-test="sign-up-btn" type="submit" disabled={send}>
                          Sign Up 
                     </button>
                     <Link to={'/'} data-test="login-link">

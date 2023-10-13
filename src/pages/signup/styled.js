@@ -2,18 +2,28 @@ import styled from "styled-components";
 
 export const ContainerSignUpPage = styled.div`
 display: flex;
-flex-direction: row;
-background-size: cover;
+justify-content: center;
+background-color: #333333;
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
 `
 export const ContainerLogo = styled.div`
-background-color: #151515;
-border: #00000040 0.25px ;
-width: 905px;
-height: 1024px;
-div {
-    margin-left: 150px;
-    margin-top: 301px;
-}
+ flex: 63;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #151515;
+  height: 100vh;
+
+
 h1 {
     font-family: 'Passion One', sans-serif;
     font-size: 106px;
@@ -32,14 +42,42 @@ p {
     margin-top: 10px;
 
 }
+@media (max-width: 767px) {
+    width: 100%;
+    height: 175px;
+    flex: 25;
+
+    p {
+        width: 237px;
+        height: 68px;
+        font-family: Oswald;
+        font-size: 23px;
+        font-weight: 700;
+        line-height: 34px;
+        letter-spacing: 0em;
+        text-align: center;
+    }
+
+    h1 {
+        width: 167px;
+        height: 84px;
+        font-family: Passion One;
+        font-size: 76px;
+        font-weight: 700;
+        line-height: 84px;
+        letter-spacing: 0.05em;
+        text-align: left;
+    }
+  }
 `
 export const ContainerSignUp = styled.div`
-background-color: #4D4D4D;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-height: 1024px;
+  flex: 37;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #333333;
+
 form {
     display: flex;
     flex-direction: column;
@@ -48,7 +86,7 @@ form {
 }
 input {
     background-color: #FFFFFF;
-    width: 429px;
+    width: calc(100% - 167px);
     height: 65px;
     margin: 10px 30px 10px 30px;
     border-radius: 6px;
@@ -60,7 +98,7 @@ input {
 }
 button {
     background-color: #1877F2;
-    width: 429px;
+    width: calc(100% - 167px);
     height: 65px;
     border-radius: 6px;
     border: none;
@@ -71,8 +109,6 @@ button {
     margin-top: 10px;
 }
 div {
-    width: 181px;
-    height: 24px;
     margin-top: 15px;
     font-family: 'Lato', sans-serif;
     font-size: 20px;
@@ -80,6 +116,34 @@ div {
     text-decoration: underline;
     color: #FFFFFF;
 }
+@media (max-width: 767px) {
+    width: 100%;
+    height: 100vh;
+    flex: 75;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 63px;
 
+    button {
+        width: calc(100% - 12.7%);
+        font-family: 'Oswald', sans-serif;
+    }
+
+    input {
+        width: calc(100% - 18%);
+        font-family: 'Oswald', sans-serif;
+    }
+
+    div{
+        font-family: Lato;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0em;
+    }
+
+}
 `
 

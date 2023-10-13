@@ -6,7 +6,13 @@ function signUp (body){
     return promise;
 }
 
-const apiAuth = { signUp };
+
+function signOut(){
+    const promise = axios.delete(`${process.env.REACT_APP_API_URL}/signout`)    
+    return promise;
+}
+
+const apiAuth = { signUp, signOut };
 
 export default apiAuth;
 
