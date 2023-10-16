@@ -24,7 +24,7 @@ export default function Login() {
 
         axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, obj)
             .then((response) => {
-
+                console.log(response.data)
                 localStorage.setItem("token", response.data.token);
                 localStorage.setItem("user", response.data.username);
                 localStorage.setItem("url", response.data.url);
@@ -34,8 +34,8 @@ export default function Login() {
             }).catch((erro) => {
 
                 setEnviado(false);
-                console.log(erro.response.data);
-                alert(erro.response.data.message || erro.response);
+                console.log(erro.response);
+                alert(erro.response.data.message || erro.response.data);
 
             });
     };
