@@ -6,65 +6,65 @@ import GlobalStyle from "../../style/GlobalStyle.js";
 
 
 export default function Login() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [enviado, setEnviado] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [enviado, setEnviado] = useState(false);
 
-    function sendInformations(e) {
-        e.preventDefault();
+  const obj = {
+    email,
+    password,
+  };
 
-        setEnviado(true);
+  function sendInformations(e) {
+    e.preventDefault();
 
-        const obj = {
-            email,
-            password,
-        };
+    setEnviado(true);
 
-        axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, obj)
-            .then((response) => {
-                console.log(response.data)
-                localStorage.setItem("token", response.data.token);
-                localStorage.setItem("user", response.data.username);
-                localStorage.setItem("url", response.data.url);
-                localStorage.setItem("userid", response.data.id);
-                navigate("/timeline");
+    axios.post(`${process.env.REACT_APP_API_URL}/sign-in`, obj)
+      .then((response) => {
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        localStorage.setItem("user", response.data.username);
+        localStorage.setItem("url", response.data.url);
+        localStorage.setItem("userid", response.data.id);
+        console.log(response.data)
 
-            }).catch((erro) => {
+        navigate("/timeline")
 
-                setEnviado(false);
-                console.log(erro.response);
-                alert(erro.response.data.message || erro.response.data);
 
-            });
-    };
+      }).catch((erro) => {
 
-    useEffect(() => {
-        if (localStorage.getItem("token")) navigate('/timeline');
-    }, [])
+        setEnviado(false);
+        console.log(erro.response);
+        alert(erro.response.data.message || erro.response.data);
 
-    return (
-        <Container>
-            <Logo>
-                <h1>linkr</h1>
-                <p>save, share and discover the best links on the web</p>
-            </Logo>
-            <SingInContainer>
-                <GlobalStyle />
+      });
+  };
 
-                <form onSubmit={sendInformations}>
-                    <input data-test="email" placeholder="e-mail" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    <input data-test="password" placeholder="password" type="password" autoComplete="new-password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    <button data-test="login-btn" type="submit" disabled={enviado}>Log In</button>
-                </form>
 
-                <Link to="/sign-up">
-                    <h2 data-test="sign-up-link">First time? Create an account!</h2>
-                </Link>
-            </SingInContainer>
-        </Container>
-    );
+  return (
+    <Container>
+      <Logo>
+        <h1>linkr</h1>
+        <p>save, share and discover the best links on the web</p>
+      </Logo>
+      <SingInContainer>
+        <GlobalStyle />
+
+        <form onSubmit={sendInformations}>
+          <input data-test="email" placeholder="e-mail" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input data-test="password" placeholder="password" type="password" autoComplete="new-password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <button data-test="login-btn" type="submit" disabled={enviado}>Log In</button>
+        </form>
+
+        <Link to="/sign-up">
+          <h2 data-test="sign-up-link">First time? Create an account!</h2>
+        </Link>
+      </SingInContainer>
+    </Container>
+  );
 }
 
 const SingInContainer = styled.section`

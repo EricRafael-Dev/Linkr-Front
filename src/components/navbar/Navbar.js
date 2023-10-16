@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function Navbar() {
     const [openLogout, setOpenLogout] = useState(false)
     const navigate = useNavigate()
+    const token = localStorage.getItem('token');
 
     function handleLogout() {
         setOpenLogout(true)
@@ -18,13 +19,15 @@ export default function Navbar() {
     }
 
     function logout(){
-        const token = localStorage.getItem('token');
+       
         apiAuth.signOut(token)
             .then(res =>{
+                console.log(token)
                 navigate("/")
                
             })
             .catch(err =>{
+                console.log(token)
                 console.log(err.response.data)
                 alert(err.response.data.message|| err.message)
             })
